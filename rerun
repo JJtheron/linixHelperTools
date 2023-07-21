@@ -1,0 +1,16 @@
+#!/bin/bash
+sed -n $1p  ~/.bash_history
+if [[ ! -z $1 ]] ; then 
+	echo "Press any key to execure:"
+	while [ true ] ; do
+		read -t 3 -n 1
+		if [ $? = 0 ] ; then
+			bash -c "$(sed -n $1p  ~/.bash_history)"
+			exit ;
+		else
+			echo  "$(sed -n $1p  ~/.bash_history)"  
+		fi
+	done
+else
+	cat -n ~/.bash_history
+fi
